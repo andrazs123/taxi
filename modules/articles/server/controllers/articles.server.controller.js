@@ -81,12 +81,15 @@ exports.delete = function (req, res) {
  * List of Articles
  */
 exports.list = function (req, res) {
-  Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
+  //res.json([{ title: 'cms', content: 'under construction'}]);
+  Article.find().exec(function (err, articles) {
+  // Article.find().exec(function (err, articles) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+      // console.log('articles', articles);
       res.json(articles);
     }
   });

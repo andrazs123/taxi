@@ -1,0 +1,42 @@
+<div class="panel panel-default card">
+  <div class="panel-heading">
+    <div>
+      <div class="taxi-name">
+        {{vm.taxi.name}}
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="taxi-photo">
+          <img src="https://www.skoda.si/media/Model_Stage_Image_Component/764-stage-image/dh-660-e9d92a/833d1cd4/1504099797/skoda-octavia-rs-pa-m67-introduction.png">
+          <!--<img src="https://www.orangewheels.co.uk/system/cap_images/overrides/000/022/036/large/New_Skoda_Octavia_Hatchback.png?1512750146">-->
+        </div>
+      </div>
+    </div>
+    <div class="row item-info">
+      <div class="col-md-12" translate>Max speed:  <b>{{vm.taxi.max_hitrost}}</b></div>
+      <div class="col-md-12" translate>Leto izdelave: <b>{{vm.taxi.leto_izdelave}}</b></div>
+      <div class="col-md-12" translate>Max passengers: <b>{{vm.taxi.max_potniki}}</b></div>
+      <div class="col-md-12" translate>Duration: <b>{{vm.najemInfo.trajanje}}</b></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <a class=""
+                ui-sref="taxis.view({ carId: vm.taxi._id })"
+                ui-state-params="vm.taxi">View more details ...</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-footer">
+    <div class="flex-between">
+      <div class="text-right">
+        <button type="submit" class="btn btn-success text-uppercase" ui-sref="taxis.edit({ carId: vm.taxi._id })">najem</button>
+        <button type="submit" class="btn btn-danger text-uppercase" ng-click="vm.prekinitev()">prekini</button>
+      </div>
+    </div>
+  </div>
+</div>

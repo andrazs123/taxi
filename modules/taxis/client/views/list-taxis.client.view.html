@@ -1,0 +1,15 @@
+<section>
+  <div class="page-header">
+    <h1>Taxis</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="taxi in vm.taxis"
+       ui-sref="taxis.view({ carId: taxi._id })"
+       class="list-group-item">
+      <h4 class="list-group-item-heading">{{taxi}}</h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.taxis.$resolved && !vm.taxis.length">
+    No Taxis yet, why don't you <a ui-sref="taxis.create">create one</a>?
+  </div>
+</section>

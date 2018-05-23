@@ -18,13 +18,18 @@
 
     angular.extend(Article.prototype, {
       createOrUpdate: function () {
-        var article = this;
+        var article = this;     // vstop podatkov
         return createOrUpdate(article);
       }
     });
 
     return Article;
 
+    /**
+     * public funkcija, vidna na zunaj: taka bo tudi Taxi.najem
+     * @param article
+     * @returns {*}
+     */
     function createOrUpdate(article) {
       if (article._id) {
         return article.$update(onSuccess, onError);
@@ -45,6 +50,12 @@
       }
     }
 
+
+
+    /**
+     * private funkcija, ko se samo notr uporablja: na tak način narediš tiste randomizacije
+     * @param error
+     */
     function handleError(error) {
       // Log error
       $log.error(error);

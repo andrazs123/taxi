@@ -28,6 +28,8 @@
   <meta name="twitter:description" content="{{description}}">
   <meta name="twitter:image" content="{{logo}}">
 
+  <!--Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <!-- Fav Icon -->
   <link href="/{{favicon}}" rel="shortcut icon" type="image/x-icon">
 
@@ -41,8 +43,10 @@
 <body class="ng-cloak">
   <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
   <section class="content">
-    <section class="container">
-      {{{block "content"}}}
+    <section class="row custom-container">
+      <div class="col-md-12">
+        {{{block "content"}}}
+      </div>
     </section>
   </section>
 
@@ -68,7 +72,7 @@
 
   <!--Application JavaScript Files-->
     {{#each jsFiles}}<script type="text/javascript" src="/{{this}}"></script>{{/each}}
-  
+
   <!--owasp config sync-->
   <script type="text/javascript">
     var sharedConfig = {{{ sharedConfig }}};

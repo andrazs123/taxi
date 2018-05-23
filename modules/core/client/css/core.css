@@ -1,5 +1,9 @@
+body{
+	font-family: Roboto, Sans-serif;
+}
+
 .content {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 .undecorated-link:hover {
   text-decoration: none;
@@ -40,4 +44,263 @@ a:hover .header-profile-image {
 }
 .has-error .help-inline.error-text {
   display: inline;
+}
+
+.custom-container {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px 10px 0 10px;
+}
+
+.card .panel-heading{
+	padding-bottom: 10px;
+}
+
+.card .panel-body {
+	min-height: 310px;
+}
+
+.card .panel-heading, .panel-body, .panel-footer {
+	padding: 15px;
+}
+
+.card .row {
+	margin-bottom: 10px !important;
+}
+
+.card .row:last-child {
+	margin-bottom: 0 !important;
+}
+
+.flex-between {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+.flex-between > div {
+	padding-right: 15px;
+}
+
+.flex-start-top {
+	align-items: flex-start;
+	display: flex;
+	justify-content: flex-start;
+}
+.flex-start-top > div {
+	padding-right: 15px;
+}
+.flex-start-top h5.header:last-child {
+	margin-top: 3px;
+}
+
+.flex-start-top span {
+	vertical-align: middle;
+}
+
+.flex-start-top h5.header {
+	margin-top: 3px;
+}
+
+.flex-start-center {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.flex-start-center > div {
+	margin-right: 15px;
+}
+
+.onoffswitch {
+	position: relative; width: 55px;
+	-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+	display: none;
+}
+.onoffswitch-label {
+	display: block; overflow: hidden; cursor: pointer;
+	height: 20px; padding: 0; line-height: 20px;
+	border: 0px solid #FFFFFF; border-radius: 31px;
+	background-color: #9E9E9E;
+}
+.onoffswitch-label:before {
+	content: "";
+	display: block; width: 31px; margin: -5.5px;
+	background: #FFFFFF;
+	position: absolute; top: 0; bottom: 0;
+	right: 31px;
+	border-radius: 31px;
+	box-shadow: 0 6px 12px 0px #757575;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+	background-color: #42A5F5;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+	border-color: #42A5F5;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+	margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+	right: 0px;
+	background-color: #2196F3;
+	box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
+}
+
+.container{
+	position: relative;
+}
+
+.navbar{
+	min-height: 100px !important;
+}
+
+.navbar-logo{
+	position: absolute;
+	top: 10px;
+	left: 30px;
+}
+
+.navbar-logo img{
+	width: 100%;
+	max-width: 80px;
+}
+
+.navbar-user{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.navbar-login a{
+	padding-right: 0px;
+}
+
+.header-button{
+
+}
+
+.total-income{
+	margin: 0 auto;
+	text-align: center;
+}
+
+.total-income .total-label{
+	color: white;
+	font-size: 1.4em;
+	margin-bottom: 10px;
+	font-weight: 300;
+	margin-top: 10px;
+}
+
+.current-time{
+	position: absolute;
+	right: 30px;
+	bottom: 0px;
+	color: aquamarine;
+}
+
+.navbar-header{
+	float: none;
+}
+
+@media (max-width: 480px) {
+	.navbar{
+		min-height: 90px;
+	}
+	.total-income .total-label{
+		font-size: 1em;
+	}
+	.navbar-logo img{
+		max-width: 60px;
+	}
+	.navbar-logo{
+		left: 15px;
+	}
+	.current-time{
+		right: 10px;
+	}
+
+}
+
+table.table {
+@table-border-padding: 10 px;
+	margin-bottom: 0;
+	font-size: 14px !important;
+}
+table.table .odd td{
+	background-color:  lightgray;
+}
+
+table.table > thead {
+	background-color: #F6F6F6;
+}
+table.table th:first-child {
+	padding-left: 10px;
+}
+table.table th:last-child {
+	padding-right: 10px;
+}
+table.table th {
+	color: #939698;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 500;
+	padding: 10px 5px;
+	border-bottom: 1px solid #DFDFDF;
+}
+
+table.table a {
+	color: #939698;
+}
+table.table a:hover {
+	 color: #FF3037;
+}
+
+table.table > tbody td, th{
+	padding: 10px 5px;
+	border-top: 0 none;
+	border-bottom: 1px solid #DFDFDF;
+	vertical-align: middle;
+
+}
+
+table.table td:first-child, th {
+	padding-left: 10px;
+}
+table.table td:last-child {
+	padding-right: 10px;
+}
+
+
+table.table:first-child {
+	 border-left: 5px solid #FF3037;
+ }
+
+
+table.table + tbody {
+	border-top: 0 none;
+}
+
+
+/*Taxi card details*/
+
+taxi-card-details .taxi-name{
+	font-weight: bold;
+	color: #333333;
+	text-transform: uppercase;
+	font-size: 1em;
+}
+
+
+taxi-card-details .taxi-photo{
+}
+
+taxi-card-details .taxi-photo img{
+	width: 100%;
+}
+
+taxi-card-details .item-info div{
+	margin-bottom: 5px;
 }

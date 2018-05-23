@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Najems</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="najem in vm.najems"
+       ui-sref="najems.view({ najemId: najem._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="najem.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="najem.user" ng-bind="najem.user.displayName"></span>
+        <span ng-if="!najem.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="najem.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.najems.$resolved && !vm.najems.length">
+    No Najems yet, why don't you <a ui-sref="najems.create">create one</a>?
+  </div>
+</section>

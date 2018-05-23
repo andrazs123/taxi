@@ -1,0 +1,74 @@
+<section>
+  <div class="page-header text-center">
+    <h1>Enter the information to confirm renting the taxi</h1>
+  </div>
+  <div>
+  </div>
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="flex-center">
+      <div class="flex-start-center">
+        <div><b>Person</b></div>
+        <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="vm.person"
+                 checked>
+          <label class="onoffswitch-label" for="myonoffswitch"></label>
+        </div>
+        <div><b>Company</b></div>
+      </div>
+    </div>
+    <form name="vm.form.najemForm" class="form-horizontal" ng-submit="vm.save(vm.form.najemForm.$valid)" novalidate>
+      <fieldset>
+        <div ng-if="!vm.person">
+          <div class="form-group">
+            <label class="control-label" for="ime">Name</label>
+            <input name="ime" type="text" ng-model="vm.najem.ime" id="ime" class="form-control" placeholder="Name"
+                   required>
+            <div ng-messages="vm.form.najemForm.ime.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Person name is required.</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="priimek">Last name</label>
+            <input name="priimek" type="text" ng-model="vm.najem.priimek" id="priimek" class="form-control"
+                   placeholder="Last name" required>
+            <div ng-messages="vm.form.najemForm.priimek.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Last name is required.</p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" ng-if="vm.person">
+          <label class="control-label" for="podjetje">Company name</label>
+          <input name="podjetje" type="text" ng-model="vm.najem.podjetje" id="podjetje" class="form-control"
+                 placeholder="Company name" required>
+          <div ng-messages="vm.form.najemForm.podjetje.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Company name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="trajanje">Duration of rent</label>
+          <input name="trajanje" type="text" ng-model="vm.najem.trajanje" id="trajanje" class="form-control"
+                 placeholder="Duration of rent in seconds" required>
+          <div ng-messages="vm.form.najemForm.trajanje.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Duration is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Total profit made from rent</label>
+          <div ng-if="vm.zasluzek">
+            € {{vm.zasluzek}}
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success text-uppercase" ng-disabled="vm.form.najemForm.$invalid"
+                  ng-click="vm.confirmNewTaxi(vm.najem)">Confirm
+          </button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="col-md-3"></div>
+</section>
