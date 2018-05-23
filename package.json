@@ -4,11 +4,11 @@
   "version": "0.6.0",
   "meanjs-version": "0.6.0",
   "private": false,
-  "author": "https://github.com/meanjs/mean/graphs/contributors",
+  "author": "Andraz",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/meanjs/mean.git"
+    "url": "https://github.com/andrazs123/taxi.git"
   },
   "engines": {
     "node": ">=6.10.0",
