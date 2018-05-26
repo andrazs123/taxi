@@ -13,13 +13,16 @@
       setupRefreshInterval();
     })();
 
-    //vm.taxis = TaxisService.query();
+    // Get taxi information
     vm.taxis = getTaxis();
 
     function getTaxis() {
       return TaxisService.getTaxis();
     }
 
+    /**
+     * Refresh interval da se klicejo podatk iz baze vsake 5 sec
+     */
     function setupRefreshInterval() {
       // will periodically refresh state data
       let refreshInterval = $interval(getTaxis, intervalMs);

@@ -11,8 +11,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="taxi-photo">
-          <img src="https://www.skoda.si/media/Model_Stage_Image_Component/764-stage-image/dh-660-e9d92a/833d1cd4/1504099797/skoda-octavia-rs-pa-m67-introduction.png">
-          <!--<img src="https://www.orangewheels.co.uk/system/cap_images/overrides/000/022/036/large/New_Skoda_Octavia_Hatchback.png?1512750146">-->
+          <img ng-src="{{vm.taxi.path_slike}}">
         </div>
       </div>
     </div>
@@ -34,10 +33,8 @@
   <div class="panel-footer">
     <div class="flex-between">
       <div class="text-right">
-        <button type="submit" class="btn btn-success text-uppercase" ui-sref="taxis.edit({ carId: vm.taxi._id })">najem</button>
-        <!--<button type="submit" class="btn btn-success text-uppercase" ng-if="!vm.prekinjen" ui-sref="taxis.edit({ carId: vm.taxi._id })">najem</button>-->
-        <!--<button type="submit" class="btn btn-danger text-uppercase" ng-if="vm.prekinjen" ng-click="vm.prekinitev()">prekini</button>-->
-        <button type="submit" class="btn btn-danger text-uppercase" ng-click="vm.prekinitev()">prekini</button>
+        <button type="submit" class="btn btn-success text-uppercase" ng-if="!vm.duration" ui-sref="taxis.edit({ carId: vm.taxi._id })">najem</button>
+        <button type="submit" class="btn btn-danger text-uppercase" ng-if="vm.duration" ng-click="vm.prekinitev()">prekini</button>
       </div>
     </div>
   </div>

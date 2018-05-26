@@ -27,6 +27,10 @@ var TaxiSchema = new Schema({
   max_hitrost: {
     type: Number,
     default: ''
+  },
+  path_slike: {
+    type: String,
+    default: ''
   }
 });
 

@@ -106,9 +106,6 @@ exports.najemByID = function (req, res, next, id) {
 
   // dobi vse za id taxi
   Najem.find({id_taxi: id}).sort('-datum').exec(function (err, najem) {
-    // iskanje samo zadnjega z apijem
-    //Najem.findOne({id_taxi: id}, {}, {sort: {'datum': 'asc'}}).exec(function (err, najem) {
-    // Najem.findById(id).populate('user', 'displayName').exec(function (err, najem) {
     if (err) {
       return next(err);
     } else if (!najem) {
@@ -117,7 +114,5 @@ exports.najemByID = function (req, res, next, id) {
       });
     }
     res.jsonp(najem);
-    // req.najem = najem;
-    // next();
   });
 };

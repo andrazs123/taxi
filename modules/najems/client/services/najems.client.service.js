@@ -13,9 +13,7 @@
     /**
      * definiraš resource
      */
-
-      // TODO: tole pot preberi iz factory
-    var Najem = $resource('http://localhost:3000/api/najems/:najemId',         //
+    var Najem = $resource('http://localhost:3000/api/najems/:najemId',
       //{najemId: '@_id'},
       {najemId: '@id_taxi'},
       {
@@ -39,21 +37,39 @@
       getNajemById: getNajemById
     };
 
+    /**
+     * Get najem by taxi ID
+     * @param taxiId
+     * @returns {*}
+     */
     function getNajemById(taxiId) {
-      // console.log('getNajemById', taxiId);
       return Najem.query({}, {
         id_taxi: taxiId
       });
     }
 
+    /**
+     * Get 1 najem
+     * @param arg
+     * @returns {*}
+     */
     function getNajem(arg) {
       return Najem.get(arg);
     }
 
+    /**
+     * Get all najems
+     * @returns {*}
+     */
     function getNajems() {
       return Najem.query();
     }
 
+    /**
+     * Create new najem
+     * @param najemInfo
+     * @returns {*}
+     */
     function createNajem(najemInfo) {
       let newNajem = new Najem({
         ime: najemInfo.ime,
@@ -88,13 +104,5 @@
       // Log error
       $log.error(error);
     }
-
-    // return $resource('api/najems/:najemId', {
-    //   najemId: '@_id'
-    // }, {
-    //   update: {
-    //     method: 'PUT'
-    //   }
-    // });
   }
 }());

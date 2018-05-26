@@ -10,14 +10,15 @@
 
   function TaxisService($resource, $log) {
 
-    // TODO: razlika med let, var, const ES6 !!!
-    // TODO: lodash ne rabiš, maš map, filter, reduce, find
-    // TODO: arrow funkcije
     let trenutenZasluzek = 0;
 
+    /**
+     * Caculate totalIncome
+     * @param zasluzek
+     * @returns {number}
+     */
     function getZasluzek(zasluzek) {
       if (!zasluzek.prekinitev){
-        // TODO: tarife daš na svoj factory, ker bo mogoče nekoč se bralo iz baze
         const lowT = 5;
         const highT = 7.5;
         if (zasluzek.amount <= 300){
@@ -33,7 +34,7 @@
 
     }
 
-    var znamke = [
+    const znamke = [
       {id: 1, name: 'Volvo'},
       {id: 2, name: 'Skoda'},
       {id: 3, name: 'Audi'},
@@ -79,8 +80,6 @@
       return Taxi.query();
     }
 
-    // TODO: f. za dobit vse najeme za določen Taxi (to boš klical na DETAILS)
-
     /**
      * Izracunaj hitrost med 120 in 220
      *
@@ -118,6 +117,10 @@
       return Math.floor(Math.random() * 9) + 1;
     }
 
+    function _getRandomNumber() {
+      return Math.floor(Math.random() * 8) + 1;
+    }
+
     /**
      * Random znamka
      * @returns {string}
@@ -125,7 +128,11 @@
      */
     function _getRandomZnamka() {
       let randomZnamka = znamke.find(randomZnamka => randomZnamka.id === _getRandomId());
-      return randomZnamka ? randomZnamka.name : 'no znamka found';
+      return randomZnamka ? randomZnamka.name : 'Skoda';
+    }
+
+    function _createTaxiPhoto() {
+      return 'modules/core/client/images/avto-0' + _getRandomNumber() + '.png';
     }
 
     /**
@@ -136,9 +143,9 @@
         name: _getRandomZnamka(),
         max_hitrost: _calculateSpeed(),
         leto_izdelave: _calculateYear(),
-        max_potniki: _getPassengerCount()
+        max_potniki: _getPassengerCount(),
+        path_slike: _createTaxiPhoto()
       });
-      // let newTaxi = new Taxi({name: 'Lamborghini', max_hitrost: _calculateSpeed(), leto_izdelave: _calculateYear(), max_potniki: _getPassengerCount()});
 
       return newTaxi.$save(onSuccess, onError);
 

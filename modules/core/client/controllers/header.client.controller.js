@@ -25,6 +25,9 @@
         listenForPrekinitev();
       })();
 
+      /**
+       * Poslusa ko uporabnik prekine najem da se zapise +500 h totalIncome
+       */
       function listenForPrekinitev() {
         $rootScope.$on('prekinitev', function () {
           vm.totalIncome += 500;
@@ -32,19 +35,32 @@
 
       }
 
+      /**
+       * Za izpis trenutnega casa
+       * @returns {string}
+       */
       function getCurrentTimeToday() {
         const today = new Date();
         const hours = today.getHours();
         const minutes = today.getMinutes();
         const seconds = today.getSeconds();
         return (hours + ':' + checkTime(minutes) + ':' + checkTime(seconds));
-        $scope.$applyAsync();   // $scope.$apply vs $scope.applyAsync vs $scope.evalAsync
+        $scope.$applyAsync();   // da se refresha
       }
 
+      /**
+       * Enable/disable buy new taxi gumb
+       * @returns {boolean}
+       */
       function checkTotalIncome() {
         return vm.totalIncome > 100;
       }
 
+      /**
+       * Doda nule ce je stevilo manjse od 10
+       * @param i
+       * @returns {*}
+       */
       function checkTime(i) {
         if (i < 10) {
           i = "0" + i;
@@ -52,6 +68,9 @@
         return i;
       }
 
+      /**
+       * Sprehodi se cez najems tabelo in izracuna dobicek
+       */
       function calculateTotalIncome() {
         NajemsService.getNajems().$promise.then(function(success) {
           success.forEach(function (success) {
@@ -73,6 +92,10 @@
         });
       }
 
+      /**
+       * Kreira nov taxi z random lasnosti, vzame 100$ iz totalIncoma in reloada state, nov taxi se zapise v bazo
+       * @returns {*}
+       */
       function buyNewTaxi() {
         return TaxisService.createTaxi().then(function (result) {
           vm.totalIncome -= 100;

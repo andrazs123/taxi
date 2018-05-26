@@ -24,16 +24,28 @@
       watchNajemInput();
     })();
 
+    /**
+     * Get all najems
+     * @returns {*}
+     */
     function getNajems() {
       return NajemsService.getNajems();
     }
 
+    /**
+     * Watch najem input to caculate theoretical zasluzek
+     */
     function watchNajemInput() {
       $scope.$watch('vm.najem.trajanje', function () {
         vm.zasluzek = calculateProfit(vm.najem.trajanje);
       }, true);
     }
 
+    /**
+     * Caculate profit from najem
+     * @param trajanje
+     * @returns {*}
+     */
     function calculateProfit(trajanje) {
       const zasluzek = [];
       zasluzek.amount = trajanje;
@@ -41,9 +53,12 @@
       return TaxisService.getZasluzek(zasluzek);
     }
 
+    /**
+     * Create taxi
+     * @param najemInfo
+     */
     function confirmNewTaxi(najemInfo) {
       const allInfo = {
-        // TODO: daj rajši kot objekt
         ime: najemInfo.ime,
         priimek: najemInfo.priimek,
         podjetje: najemInfo.podjetje,

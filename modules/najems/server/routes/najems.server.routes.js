@@ -13,9 +13,8 @@ module.exports = function (app) {
     .post(najems.create);
 
   app.route('/api/najems/:najemId')
-  // TODO: vklopi nazaj za produkcijo
     .all(najemsPolicy.isAllowed)
-    // .get(najems.read)
+    .get(najems.read)
     .get(najems.najemByID)
     .put(najems.update)
     .delete(najems.delete);

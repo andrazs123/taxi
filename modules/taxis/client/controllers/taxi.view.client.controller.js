@@ -6,8 +6,6 @@
     .module('taxis')
     .controller('TaxisViewController', TaxisViewController);
 
-  // TaxisController.$inject = ['$scope', '$state', '$window', 'Authentication', 'taxiResolve'];
-
   function TaxisViewController ($scope, $state, $window, Authentication, taxiResolve, NajemsService, TaxisService) {
     var vm = this;
 
@@ -16,10 +14,10 @@
     vm.error = null;
     vm.zasluzek = 0;
 
-    // vm.najems = getNajems();
     vm.calculateProfit = calculateProfit;
     vm.getZasluzek = getZasluzek;
 
+    // Get najem info by taxi id
     vm.najemInfo = getNajem(vm.taxi._id).then(function (result) {
       if (result){
         vm.najems = result;
@@ -27,18 +25,29 @@
       }
     });
 
+    /**
+     * Get total income from all najems
+     */
     function getTotalIncome() {
       vm.najems.forEach(function (element) {
         vm.zasluzek += getZasluzek(element.trajanje)
       });
     }
 
-
-
+    /**
+     * Get najem by taxi id
+     * @param taxiId
+     * @returns {*}
+     */
     function getNajem(taxiId) {
       return NajemsService.getNajemById(taxiId).$promise;
     }
 
+    /**
+     * Get zasluzek za posamezen najem
+     * @param zasluzek
+     * @returns {*}
+     */
     function getZasluzek(zasluzek) {
       const allInfo = {};
       allInfo.amount = zasluzek;
@@ -46,10 +55,11 @@
       return TaxisService.getZasluzek(allInfo);
     }
 
-    function getNajems() {
-      return NajemsService.getNajems();
-    }
-
+    /**
+     *
+     * @param trajanje
+     * @returns {*}
+     */
     function calculateProfit(trajanje) {
       const zasluzek = [];
       zasluzek.amount = trajanje;

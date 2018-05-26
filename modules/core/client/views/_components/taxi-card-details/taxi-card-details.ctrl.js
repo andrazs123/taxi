@@ -11,6 +11,7 @@
       let vm = this;
 
       vm.prekinitev = prekinitev;
+      // Get najem info for current taxi
       vm.najemInfo = getNajem(vm.taxi._id).then(function (result) {
         if(result[0]){
           vm.prekinjen = result[0].prekinjen;
@@ -18,10 +19,18 @@
         }
       });
 
+      /**
+       * Get najem by taxi id
+       * @param taxiId
+       * @returns {*}
+       */
       function getNajem(taxiId) {
         return NajemsService.getNajemById(taxiId).$promise;
       }
 
+      /**
+       * Emit da totalIncome ve da mora dodat 500
+       */
       function prekinitev() {
         $rootScope.$emit('prekinitev');
       }
