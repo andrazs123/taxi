@@ -40,7 +40,7 @@
       .state('taxis.view', {
         url: '/:carId',
         templateUrl: 'modules/taxis/client/views/view-taxi.client.view.html',
-        controller: 'TaxisController',
+        controller: 'TaxisViewController',
         controllerAs: 'vm',
         resolve: {
           taxiResolve: getTaxi

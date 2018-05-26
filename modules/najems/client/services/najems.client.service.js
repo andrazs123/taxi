@@ -13,14 +13,21 @@
     /**
      * definiraš resource
      */
-    var Najem = $resource('api/najems/:najemId',
-      {najemId: '@_id'},
+
+      // TODO: tole pot preberi iz factory
+    var Najem = $resource('http://localhost:3000/api/najems/:najemId',         //
+      //{najemId: '@_id'},
+      {najemId: '@id_taxi'},
       {
         update: {
           method: 'PUT'
         },
         query: {
           method: 'GET',
+          isArray: true
+        },
+        save: {
+          method: 'POST',
           isArray: true
         }
       });
@@ -33,7 +40,10 @@
     };
 
     function getNajemById(taxiId) {
-      return Najem.query(taxiId);
+      // console.log('getNajemById', taxiId);
+      return Najem.query({}, {
+        id_taxi: taxiId
+      });
     }
 
     function getNajem(arg) {

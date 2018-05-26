@@ -1,101 +1,39 @@
-<!--<section>-->
-  <!--<div class="page-header">-->
-    <!--<h1 ng-bind="vm.taxi.name"></h1>-->
-  <!--</div>-->
-  <!--<div class="pull-right"-->
-       <!--ng-show="vm.taxi.isCurrentUserOwner">-->
-    <!--<a class="btn btn-primary"-->
-       <!--ui-sref="taxis.edit({ carId: vm.taxi._id })">-->
-      <!--<i class="glyphicon glyphicon-edit"></i>-->
-    <!--</a>-->
-    <!--<a class="btn btn-primary" ng-click="vm.remove()">-->
-      <!--<i class="glyphicon glyphicon-trash"></i>-->
-    <!--</a>-->
-  <!--</div>-->
-  <!--<small>-->
-    <!--<em class="text-muted">-->
-      <!--Posted on-->
-      <!--<span ng-bind="vm.taxi.created | date:'mediumDate'"></span>-->
-      <!--by-->
-      <!--<span ng-if="vm.taxi.user"-->
-            <!--ng-bind="vm.taxi.user.displayName"></span>-->
-      <!--<span ng-if="!vm.taxi.user">Deleted User</span>-->
-    <!--</em>-->
-  <!--</small>-->
-  <!--<p class="lead" ng-bind="vm.taxi.content"></p>-->
-<!--</section>-->
-
-<div class="container view-content">
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="flex-start-top">
-                  <div class="machine-status">
-                    <div class="profile-image-holder">
-                      <!--<cms-identicon ng-if="!vm.egm.egm.image" hash="vm.egm.egm.image"></cms-identicon>-->
-                      <!--<img-->
-                        <!--ng-if="vm.egm.egm.image">-->
-                    </div>
-                  </div>
-
-                <div class="col-sm-12">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div>
-                        <img src="../../../images/avto-01.png" height="150" width="150"/>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div>
-                        <div>
-                          <h4>Title</h4>
-                          <span>
-                            {{vm.taxi.name}}
-                          </span>
-                        </div>
-                        <div>
-                          <h5>All earnings</h5>
-                          <span>
-                            {{vm.taxi.max_hitrost}}
-                          </span>
-                        </div>
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="flex-start-top">
+          <div class="image-holder">
+            <img
+              src="https://www.skoda.si/media/Model_Stage_Image_Component/764-stage-image/dh-660-e9d92a/833d1cd4/1504099797/skoda-octavia-rs-pa-m67-introduction.png">
+          </div>
+          <div class="item-info item-info-details">
+            <div class="" translate><h3 class="text-uppercase">{{vm.taxi.name}}</h3></div>
+            <div class="" translate><div>All earnings:</div> <span class="all-earnings">€ {{vm.zasluzek}}</span></div>
           </div>
         </div>
       </div>
-
     </div>
-
+  </div>
+</div>
 
   <div class="row">
     <div class="col-md-12">
       <h2 class="light margin-bottom-20 gray-dark" translate>
-        History
+        Rent history
       </h2>
       <table class="table" style="width:100%">
         <tr>
-          <th>Date of rent</th>
-          <th>Duration of rent</th>
-          <th>Earnings</th>
+          <th>Date</th>
+          <th>Duration</th>
+          <th>Income</th>
         </tr>
-        <tr ng-repeat="history in vm.najem">
+        <tr ng-repeat="history in vm.najems">
           <td>{{history.datum | date}}</td>
           <td>{{history.trajanje}} sec</td>
-          <td>$150</td>
+          <td>€ {{vm.getZasluzek(history.trajanje)}}</td>
         </tr>
         <tr>
       </table>
     </div>
   </div>
-
-</div>

@@ -13,21 +13,23 @@
     // TODO: razlika med let, var, const ES6 !!!
     // TODO: lodash ne rabiš, maš map, filter, reduce, find
     // TODO: arrow funkcije
+    let trenutenZasluzek = 0;
 
     function getZasluzek(zasluzek) {
-      // if (!zasluzek.prekinitev && trenutenZasluzek > 0){
+      if (!zasluzek.prekinitev){
+        // TODO: tarife daš na svoj factory, ker bo mogoče nekoč se bralo iz baze
         const lowT = 5;
         const highT = 7.5;
         if (zasluzek.amount <= 300){
           return zasluzek.amount * lowT;
         } else {
           const ostanek = zasluzek.amount - 300;
-          const trenutenZasluzek = (ostanek + lowT) + ((zasluzek.amount-ostanek)* highT);
-          return (ostanek + lowT) + ((zasluzek.amount-ostanek)* highT);
+          trenutenZasluzek = (ostanek + lowT) + ((zasluzek.amount-ostanek)* highT);
+          return trenutenZasluzek;
         }
-      // } else {
-      //   vm.trenutenZasluzek -= zasluzek.amount;
-      // }
+      } else {
+         return trenutenZasluzek += 500;
+       }
 
     }
 
@@ -46,15 +48,17 @@
     /**
      * definiraš resource
      */
-    var Taxi = $resource('api/taxis/:carId',
+    var Taxi = $resource('http://localhost:3000/api/taxis/:carId',
       {carId: '@_id'},
       {
         update: {
           method: 'PUT'
+        },
+        query: {
+          method: 'GET',
+          isArray: true
         }
       });
-
-    // return Taxi;
 
     return {
       getTaxi: getTaxi,
@@ -78,7 +82,7 @@
     // TODO: f. za dobit vse najeme za določen Taxi (to boš klical na DETAILS)
 
     /**
-     * dodaj komentarje za funkcije
+     * Izracunaj hitrost med 120 in 220
      *
      * @returns {number}
      * @private
@@ -87,25 +91,38 @@
       return Math.floor(Math.random() * (220 - 120 + 1)) + 120;
     }
 
+    /**
+     * Izracunaj leto med 1995 in 2008
+     * @returns {number}
+     * @private
+     */
     function _calculateYear() {
       return Math.floor(Math.random() * (2018 - 1995 + 1) + 1995);
     }
 
+    /**
+     * Stevilo potnikov med 1 in 4
+     * @returns {number}
+     * @private
+     */
     function _getPassengerCount() {
       return Math.floor(Math.random() * 4) + 1;
     }
 
+    /**
+     * Private funkcija za dolocanje random znamke
+     * @returns {number}
+     * @private
+     */
     function _getRandomId() {
       return Math.floor(Math.random() * 9) + 1;
     }
 
-    //
-    // fruit => fruit.name === 'cherries'
-    //   * js isto kot
-    // * function(fruit) {
-    // *  return fruit.name === 'cherries'
-    //     * }
-
+    /**
+     * Random znamka
+     * @returns {string}
+     * @private
+     */
     function _getRandomZnamka() {
       let randomZnamka = znamke.find(randomZnamka => randomZnamka.id === _getRandomId());
       return randomZnamka ? randomZnamka.name : 'no znamka found';

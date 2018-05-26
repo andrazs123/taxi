@@ -42,16 +42,16 @@
     }
 
     function confirmNewTaxi(najemInfo) {
-      const allInfo = {};
-      allInfo.ime = najemInfo.ime;
-      allInfo.priimek = najemInfo.priimek;
-      allInfo.podjetje = najemInfo.podjetje;
-      allInfo.trajanje = najemInfo.trajanje;
-      allInfo.id_taxi = vm.taxi._id;
-      var x = NajemsService.createNajem(allInfo).then(function (result) {
-        $state.go('taxis.view');
-      });
-
+      const allInfo = {
+        // TODO: daj rajši kot objekt
+        ime: najemInfo.ime,
+        priimek: najemInfo.priimek,
+        podjetje: najemInfo.podjetje,
+        trajanje: najemInfo.trajanje,
+        id_taxi: vm.taxi._id
+      };
+      NajemsService.createNajem(allInfo);
+      $state.go('home');
     }
   }
 }());

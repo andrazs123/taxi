@@ -17,6 +17,7 @@ exports.create = function(req, res) {
   najem.user = req.user;
 
   najem.save(function(err) {
+    console.log('najem save', err);
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -30,7 +31,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Najem
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var najem = req.najem ? req.najem.toJSON() : {};
 
@@ -44,12 +45,12 @@ exports.read = function(req, res) {
 /**
  * Update a Najem
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var najem = req.najem;
 
   najem = _.extend(najem, req.body);
 
-  najem.save(function(err) {
+  najem.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -63,10 +64,10 @@ exports.update = function(req, res) {
 /**
  * Delete an Najem
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var najem = req.najem;
 
-  najem.remove(function(err) {
+  najem.remove(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -80,8 +81,8 @@ exports.delete = function(req, res) {
 /**
  * List of Najems
  */
-exports.list = function(req, res) {
-  Najem.find().sort('-created').populate('user', 'displayName').exec(function(err, najems) {
+exports.list = function (req, res) {
+  Najem.find().sort('-created').populate('user', 'displayName').exec(function (err, najems) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -95,7 +96,7 @@ exports.list = function(req, res) {
 /**
  * Najem middleware
  */
-exports.najemByID = function(req, res, next, id) {
+exports.najemByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -103,7 +104,11 @@ exports.najemByID = function(req, res, next, id) {
     });
   }
 
-  Najem.findById(id).populate('user', 'displayName').exec(function (err, najem) {
+  // dobi vse za id taxi
+  Najem.find({id_taxi: id}).sort('-datum').exec(function (err, najem) {
+    // iskanje samo zadnjega z apijem
+    //Najem.findOne({id_taxi: id}, {}, {sort: {'datum': 'asc'}}).exec(function (err, najem) {
+    // Najem.findById(id).populate('user', 'displayName').exec(function (err, najem) {
     if (err) {
       return next(err);
     } else if (!najem) {
@@ -111,7 +116,8 @@ exports.najemByID = function(req, res, next, id) {
         message: 'No Najem with that identifier has been found'
       });
     }
-    req.najem = najem;
-    next();
+    res.jsonp(najem);
+    // req.najem = najem;
+    // next();
   });
 };

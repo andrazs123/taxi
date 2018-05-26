@@ -32,6 +32,9 @@ var NajemSchema = new Schema({
   prekinjen: {
     type: Boolean,
     default: false
+  },
+  id_taxi: {
+    type: String
   }
 });
 

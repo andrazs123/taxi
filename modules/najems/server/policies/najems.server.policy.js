@@ -28,7 +28,7 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get', 'post']
     }, {
       resources: '/api/najems/:najemId',
-      permissions: ['get']
+      permissions: ['get', 'put', 'post']
     }]
   }, {
     roles: ['guest'],

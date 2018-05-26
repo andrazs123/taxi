@@ -15,7 +15,6 @@
 
     //vm.taxis = TaxisService.query();
     vm.taxis = getTaxis();
-    console.log('taxis', vm.taxis);
 
     function getTaxis() {
       return TaxisService.getTaxis();
