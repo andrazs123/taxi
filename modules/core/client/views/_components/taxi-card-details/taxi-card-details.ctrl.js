@@ -16,8 +16,17 @@
         if(result[0]){
           vm.prekinjen = result[0].prekinjen;
           vm.duration = result[0].trajanje;
+          vm.datumNajem = result[0].datum;
+          // vm.najemActive = checkIfNajemIsOver();
         }
       });
+
+      /**
+       * Koncept za preverjanje časa
+       */
+      // function checkIfNajemIsOver() {
+      //   return vm.datumNajem < Date.now();
+      // }
 
       /**
        * Get najem by taxi id
