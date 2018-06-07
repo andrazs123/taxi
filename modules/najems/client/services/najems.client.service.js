@@ -26,7 +26,7 @@
         },
         save: {
           method: 'POST',
-          isArray: true
+          isArray: false
         }
       });
 

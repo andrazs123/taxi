@@ -23,15 +23,13 @@ var NajemSchema = new Schema({
     default: ''
   },
   datum: {
-    type: Date,
-    default: Date.now()
+    type: Date
   },
   trajanje: {
-    type: String
+    type: Number
   },
   prekinjen: {
-    type: Boolean,
-    default: false
+    type: Boolean
   },
   id_taxi: {
     type: String

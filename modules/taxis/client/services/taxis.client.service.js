@@ -144,7 +144,8 @@
         max_hitrost: _calculateSpeed(),
         leto_izdelave: _calculateYear(),
         max_potniki: _getPassengerCount(),
-        path_slike: _createTaxiPhoto()
+        path_slike: _createTaxiPhoto(),
+        datum_nastanka: Date.now()
       });
 
       return newTaxi.$save(onSuccess, onError);

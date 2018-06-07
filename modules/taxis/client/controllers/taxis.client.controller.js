@@ -14,7 +14,6 @@
     vm.authentication = Authentication;
     vm.taxi = taxiResolve;
     vm.error = null;
-    vm.form = {};
 
     vm.confirmNewTaxi = confirmNewTaxi;
     vm.najem = getNajems();

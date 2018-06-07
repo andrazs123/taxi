@@ -31,6 +31,9 @@ var TaxiSchema = new Schema({
   path_slike: {
     type: String,
     default: ''
+  },
+  datum_nastanka: {
+    type: Date
   }
 });
 

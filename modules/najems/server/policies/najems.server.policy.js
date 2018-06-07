@@ -25,19 +25,23 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/najems',
-      permissions: ['get', 'post']
+      // permissions: ['get', 'post', 'put']
+      permissions: '*'
     }, {
       resources: '/api/najems/:najemId',
-      permissions: ['get', 'put', 'post']
+      // permissions: ['get', 'post', 'put']
+      permissions: '*'
     }]
   }, {
     roles: ['guest'],
     allows: [{
       resources: '/api/najems',
-      permissions: ['get']
+      // permissions: ['get', 'post', 'put']
+      permissions: '*'
     }, {
       resources: '/api/najems/:najemId',
-      permissions: ['get']
+      // permissions: ['get', 'put']
+      permissions: '*'
     }]
   }]);
 };
@@ -46,7 +50,8 @@ exports.invokeRolesPolicies = function () {
  * Check If Najems Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
-  var roles = (req.user) ? req.user.roles : ['guest'];
+  // var roles = (req.user) ? req.user.roles : ['guest']; TODO
+  var roles = (req.user) ? req.user.roles : ['admin'];
 
   // If an Najem is being processed and the current user created it then allow any manipulation
   if (req.najem && req.user && req.najem.user && req.najem.user.id === req.user.id) {

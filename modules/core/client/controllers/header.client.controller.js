@@ -32,7 +32,6 @@
         $rootScope.$on('prekinitev', function () {
           vm.totalIncome += 500;
         });
-
       }
 
       /**
@@ -88,6 +87,10 @@
               vm.totalIncome +=  TaxisService.getZasluzek(neprekinjen);
             }
           });
+          if (vm.totalIncome === 0){
+            // Tukaj se nastavi začetni zaslužek
+            vm.totalIncome = 123;
+          }
           return vm.totalIncome;
         });
       }

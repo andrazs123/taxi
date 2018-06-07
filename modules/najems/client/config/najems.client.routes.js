@@ -23,19 +23,19 @@
           pageTitle: 'Najems List'
         }
       })
-      .state('najems.create', {
-        url: '/create',
-        templateUrl: 'modules/najems/client/views/form-najem.client.view.html',
-        controller: 'NajemsController',
-        controllerAs: 'vm',
-        resolve: {
-          najemResolve: newNajem
-        },
-        data: {
-          roles: ['user', 'admin'],
-          pageTitle: 'Najems Create'
-        }
-      })
+      // .state('najems.create', {
+      //   url: '/create',
+      //   templateUrl: 'modules/najems/client/views/form-najem.client.view.html',
+      //   controller: 'NajemsController',
+      //   controllerAs: 'vm',
+      //   resolve: {
+      //     najemResolve: newNajem
+      //   },
+      //   data: {
+      //     roles: ['user', 'admin'],
+      //     pageTitle: 'Najems Create'
+      //   }
+      // })
       .state('najems.edit', {
         url: '/:najemId/edit',
         templateUrl: 'modules/najems/client/views/form-najem.client.view.html',
@@ -71,9 +71,9 @@
     }).$promise;
   }
 
-  newNajem.$inject = ['NajemsService'];
-
-  function newNajem(NajemsService) {
-    return new NajemsService();
-  }
+  // newNajem.$inject = ['NajemsService'];
+  //
+  // function newNajem(NajemsService) {
+  //   return new NajemsService();
+  // }
 }());

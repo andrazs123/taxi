@@ -1,6 +1,6 @@
 <section>
   <div class="row">
-    <div class="col-md-4" ng-repeat="taxis in vm.taxis">
+    <div class="col-md-4" ng-repeat="taxis in vm.taxis  | orderBy: '-datum_nastanka' ">
       <taxi-card-details taxi="taxis"></taxi-card-details>
       </div>
   </div>
