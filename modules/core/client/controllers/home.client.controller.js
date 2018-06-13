@@ -8,40 +8,41 @@
   function HomeController(TaxisService, $scope, $interval, $rootScope) {
     const vm = this;
     const intervalMs = 5000;
-    let initialTaxis = [];
 
     (function init() {
-      vm.taxis = TaxisService.getTaxis();
-      initialTaxis = angular.copy(vm.taxis);
+      watchAllTaxiData();
+      getTaxiData().then(function (result) {
+        vm.taxis = result;
+      });
       setupRefreshInterval();
     })();
 
-    // Get taxi information
-    // vm.taxis = getTaxis();
-
-    // let taxiCopy = angular.copy(vm.taxis);
-
-    function getTaxis() {
-      // TODO: da narediš promise ($promise) in potem .then in tam setaš
-      let newTaxis = TaxisService.getTaxis();
-      $rootScope.$broadcast('getTaxis');
-      console.log('update taxis', newTaxis.length);
-      console.log('update taxis', initialTaxis.length);
-      if (newTaxis.length !== initialTaxis.length) {
-        vm.taxis = angular.copy(newTaxis);
-      }
-      //vm.taxis =  TaxisService.getTaxis();
-      // return TaxisService.getTaxis();
-      // console.log(vm.taxis);
+    function watchAllTaxiData() {
+      // $scope.$watch('vm.taxis', function () {
+      $scope.$watch('vm.taxis', function (nVal, oVal) {
+        console.log('nVal', nVal);
+        console.log('oVal', oVal);
+        if (!angular.equals(nVal, oVal)){
+          vm.initialTaxis = angular.copy(vm.taxis);
+        }
+      }, true);
     }
 
-    // todo ask mare
-    // function getTaxisAndSeeIfAnyNew() {
-    //   var newTaxiCopy = getTaxis();
-    //   if (vm.taxis !== newTaxiCopy) {
-    //     vm.taxis = newTaxiCopy;
-    //   }
-    // }
+    function getTaxiData() {
+      return TaxisService.getTaxis().$promise;
+    }
+
+    // TODO: da narediš promise ($promise) in potem .then in tam setaš
+    function getTaxis() {
+      getTaxiData().then(function (result) {
+        console.log('getTaxis.getTaxiData.then');
+        vm.newTaxis = result;
+        if (vm.newTaxis && vm.initialTaxis && vm.newTaxis.length !== vm.initialTaxis.length) {
+          vm.taxis = angular.copy(vm.newTaxis);
+        }
+        $rootScope.$broadcast('getTaxis');
+      });
+    }
 
     /**
      * Refresh interval da se klicejo podatk iz baze vsake 5 sec

@@ -5,9 +5,9 @@
     .module('core')
     .factory('authInterceptor', authInterceptor);
 
-  authInterceptor.$inject = ['$q', '$injector', 'Authentication'];
+  authInterceptor.$inject = ['$q', '$injector'];
 
-  function authInterceptor($q, $injector, Authentication) {
+  function authInterceptor($q, $injector) {
     var service = {
       responseError: responseError
     };
@@ -22,8 +22,9 @@
             break;
           case 401:
             // Deauthenticate the global user
-            Authentication.user = null;
-            $injector.get('$state').transitionTo('authentication.signin');
+            // Authentication.user = null;
+            // $injector.get('$state').transitionTo('authentication.signin');
+            // TODO da gre na home state
             break;
           case 403:
             $injector.get('$state').transitionTo('forbidden');

@@ -22,7 +22,7 @@
       <h2 class="light margin-bottom-20 gray-dark" translate>
         Rent history
       </h2>
-      <table class="table" style="width:100%">
+      <table class="table" style="width:100%" ng-if="vm.najems.length">
         <tr>
           <th>Date</th>
           <th>Duration</th>
@@ -35,5 +35,8 @@
         </tr>
         <tr>
       </table>
+      <div ng-if="!vm.najems.length">
+        No rent history
+      </div>
     </div>
   </div>

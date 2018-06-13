@@ -6,10 +6,9 @@
     .module('taxis')
     .controller('TaxisViewController', TaxisViewController);
 
-  function TaxisViewController ($scope, $state, $window, Authentication, taxiResolve, NajemsService, TaxisService) {
+  function TaxisViewController ($scope, $state, $window, taxiResolve, NajemsService, TaxisService) {
     var vm = this;
 
-    vm.authentication = Authentication;
     vm.taxi = taxiResolve;
     vm.error = null;
     vm.zasluzek = 0;

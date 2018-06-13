@@ -41,56 +41,26 @@ exports.read = function (req, res) {
 };
 
 /**
- * Update a Najem
+ * Update a Najem / prekinitev najema
  */
 exports.update = function (req, res) {
-  console.log('najem update');
-  res.jsonp(JSON.stringify(req));
+  var najemData = req.body;
 
-  // tukaj dobiš že iz route najemId
-  // let currentDate = new Date.now();
-  // let prekinjen = true;
-  // ? let najem = {
-  //    id: najemId,
-  //    currentDate
-  //    prekinjen: true
-  // }
-
-  // UPDATE najem SET prekinjen = true WHERE najemId = :najemId;
-  // mogoče ma moongose update funkcijo; samo spišeš update na varianto zg. sql
-  // najem.update({ _id: najemId }, { $set: { prekinjen: true, datum: currentDate }}, function(err) {
-  //   if (err) {
-  //     return res.status(400).send({
-  //       message: errorHandler.getErrorMessage(err)
-  //     });
-  //   } else {
-  //     res.jsonp(najem);
-  //   }
-  // });
-  // http://mongoosejs.com/docs/documents.html
-
-  // TODO: najt delujoč api za UPDATE
-
-  // var najem = req.najem;
-  //
-  // najem = _.extend(najem, req.body);
-  //
-  // najem.save(function (err) {
-  //   if (err) {
-  //     return res.status(400).send({
-  //       message: errorHandler.getErrorMessage(err)
-  //     });
-  //   } else {
-  //     res.jsonp(najem);
-  //   }
-  // });
+  Najem.findByIdAndUpdate({_id: najemData._id}, { $set: {prekinjen: true}}, function (err, oneNajem) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(oneNajem);
+    }
+  });
 };
 
 /**
  * Delete an Najem
  */
 exports.delete = function (req, res) {
-  console.log('najem delete');
   var najem = req.najem;
 
   najem.remove(function (err) {
@@ -123,7 +93,6 @@ exports.list = function (req, res) {
  * Najem middleware
  */
 exports.najemByID = function (req, res, next, id) {
-  console.log('najem najemByID');
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Najem is invalid'

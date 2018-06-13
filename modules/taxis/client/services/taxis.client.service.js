@@ -18,6 +18,21 @@
      * @returns {number}
      */
     function getZasluzek(zasluzek) {
+      // TODO če je prekinjen se izracuna zadeva in doda se 500
+
+      // if (!zasluzek.prekinitev){
+      //   trenutenZasluzek += 500;
+      // }
+      // const lowT = 5;
+      // const highT = 7.5;
+      // if (zasluzek.amount <= 300){
+      //   return zasluzek.amount * lowT;
+      // } else {
+      //   const ostanek = zasluzek.amount - 300;
+      //   trenutenZasluzek = (ostanek + lowT) + ((zasluzek.amount-ostanek)* highT);
+      //   return trenutenZasluzek;
+      // }
+
       if (!zasluzek.prekinitev){
         const lowT = 5;
         const highT = 7.5;

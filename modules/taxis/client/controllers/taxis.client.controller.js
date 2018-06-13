@@ -6,12 +6,9 @@
     .module('taxis')
     .controller('TaxisController', TaxisController);
 
-  // TaxisController.$inject = ['$scope', '$state', '$window', 'Authentication', 'taxiResolve'];
-
-  function TaxisController ($scope, $state, $window, Authentication, taxiResolve, NajemsService, TaxisService) {
+  function TaxisController ($scope, $state, $window, taxiResolve, NajemsService, TaxisService) {
     var vm = this;
 
-    vm.authentication = Authentication;
     vm.taxi = taxiResolve;
     vm.error = null;
 

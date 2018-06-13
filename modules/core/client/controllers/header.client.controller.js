@@ -5,11 +5,10 @@
       .module('core')
       .controller('HeaderController', HeaderController);
 
-    function HeaderController($scope, $state, Authentication, menuService, TaxisService, NajemsService, $rootScope) {
+    function HeaderController($scope, $state, menuService, TaxisService, NajemsService, $rootScope) {
       var vm = this;
 
       vm.accountMenu = menuService.getMenu('account').items[0];
-      vm.authentication = Authentication;
       vm.isCollapsed = false;
       vm.menu = menuService.getMenu('topbar');
       vm.totalIncome = 0;
@@ -31,6 +30,8 @@
       function listenForPrekinitev() {
         $rootScope.$on('prekinitev', function () {
           vm.totalIncome += 500;
+          // TODO ask mare če je reload false uredu
+          $state.go($state.current, {}, {reload: false});
         });
       }
 
@@ -78,13 +79,13 @@
                 prekinjen: true,
                 amount: success.trajanje
               };
-              vm.totalIncome +=TaxisService.getZasluzek(prekinjen);
+              vm.totalIncome += TaxisService.getZasluzek(prekinjen);
             } else {
               const neprekinjen = {
                 prekinjen: false,
                 amount: success.trajanje
               };
-              vm.totalIncome +=  TaxisService.getZasluzek(neprekinjen);
+              vm.totalIncome += TaxisService.getZasluzek(neprekinjen);
             }
           });
           if (vm.totalIncome === 0){
@@ -102,7 +103,7 @@
       function buyNewTaxi() {
         return TaxisService.createTaxi().then(function (result) {
           vm.totalIncome -= 100;
-          $state.reload();
+          $state.go($state.current, {}, {reload: true});
         })
       }
 

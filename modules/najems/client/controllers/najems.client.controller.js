@@ -6,12 +6,11 @@
     .module('najems')
     .controller('NajemsController', NajemsController);
 
-  NajemsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'najemResolve'];
+  NajemsController.$inject = ['$scope', '$state', '$window', 'najemResolve'];
 
-  function NajemsController ($scope, $state, $window, Authentication, najem) {
+  function NajemsController ($scope, $state, $window, najem) {
     var vm = this;
 
-    vm.authentication = Authentication;
     vm.najem = najem;
     vm.error = null;
     vm.form = {};

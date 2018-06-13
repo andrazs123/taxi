@@ -18,7 +18,8 @@
       {najemId: '@id_taxi'},
       {
         update: {
-          method: 'PUT'
+          method: 'PUT',
+          isArray: false
         },
         query: {
           method: 'GET',
@@ -34,7 +35,8 @@
       getNajem: getNajem,
       getNajems: getNajems,
       createNajem: createNajem,
-      getNajemById: getNajemById
+      getNajemById: getNajemById,
+      updateNajem: updateNajem
     };
 
     /**
@@ -65,6 +67,10 @@
       return Najem.query();
     }
 
+    function updateNajem(najemData) {
+      return najemData.$update(onSuccess, onError);
+    }
+
     /**
      * Create new najem
      * @param najemInfo
@@ -83,17 +89,18 @@
 
       return newNajem.$save(onSuccess, onError);
 
-      // Handle successful response
-      function onSuccess(article) {
-        // Any required internal processing from inside the service, goes here.
-      }
+    }
 
-      // Handle error response
-      function onError(errorResponse) {
-        let error = errorResponse.data;
-        // Handle error internally
-        handleError(error);
-      }
+    // Handle successful response
+    function onSuccess(article) {
+      // Any required internal processing from inside the service, goes here.
+    }
+
+    // Handle error response
+    function onError(errorResponse) {
+      let error = errorResponse.data;
+      // Handle error internally
+      handleError(error);
     }
 
     /**
