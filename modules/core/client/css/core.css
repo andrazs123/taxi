@@ -162,6 +162,21 @@ a:hover .header-profile-image {
 	position: relative;
 }
 
+.no-data {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-transform: uppercase;
+	color: #939698;
+	font-style: italic;
+	font-size: 12px;
+}
+
+.bg-info {
+	 background-color: rgba(51, 187, 255, 0.25);
+	 border-color: #5bc0de;
+}
+
 .navbar{
 	min-height: 100px !important;
 }
