@@ -6,11 +6,7 @@
     .module('taxis')
     .factory('TaxisService', TaxisService);
 
-  TaxisService.$inject = ['$resource', '$log'];
-
   function TaxisService($resource, $log) {
-
-    let trenutenZasluzek = 0;
 
     /**
      * Caculate totalIncome
@@ -18,34 +14,22 @@
      * @returns {number}
      */
     function getZasluzek(zasluzek) {
-      // TODO če je prekinjen se izracuna zadeva in doda se 500
+      let trenutenZasluzek = 0;
 
-      // if (!zasluzek.prekinitev){
-      //   trenutenZasluzek += 500;
-      // }
-      // const lowT = 5;
-      // const highT = 7.5;
-      // if (zasluzek.amount <= 300){
-      //   return zasluzek.amount * lowT;
-      // } else {
-      //   const ostanek = zasluzek.amount - 300;
-      //   trenutenZasluzek = (ostanek + lowT) + ((zasluzek.amount-ostanek)* highT);
-      //   return trenutenZasluzek;
-      // }
-
-      if (!zasluzek.prekinitev){
-        const lowT = 5;
-        const highT = 7.5;
-        if (zasluzek.amount <= 300){
-          return zasluzek.amount * lowT;
-        } else {
-          const ostanek = zasluzek.amount - 300;
-          trenutenZasluzek = (ostanek + lowT) + ((zasluzek.amount-ostanek)* highT);
-          return trenutenZasluzek;
-        }
+      if (zasluzek.prekinjen){
+        trenutenZasluzek += 500;
+      }
+      const lowT = 5;
+      const highT = 7.5;
+      if (zasluzek.amount <= 300){
+        let smallZasluzek = zasluzek.amount * lowT;
+        trenutenZasluzek += smallZasluzek;
+        return trenutenZasluzek;
       } else {
-         return trenutenZasluzek += 500;
-       }
+        const ostanek = zasluzek.amount - 300;
+        trenutenZasluzek = (ostanek + lowT) + ((zasluzek.amount-ostanek)* highT);
+        return trenutenZasluzek;
+      }
 
     }
 
@@ -64,7 +48,7 @@
     /**
      * definiraš resource
      */
-    var Taxi = $resource('http://localhost:3000/api/taxis/:carId',
+    let Taxi = $resource('http://localhost:3000/api/taxis/:carId',
       {carId: '@_id'},
       {
         update: {
@@ -132,6 +116,11 @@
       return Math.floor(Math.random() * 9) + 1;
     }
 
+    /**
+     * Generate random number which is used for getting the random picture path id
+     * @returns {number}
+     * @private
+     */
     function _getRandomNumber() {
       return Math.floor(Math.random() * 8) + 1;
     }
@@ -146,6 +135,11 @@
       return randomZnamka ? randomZnamka.name : 'Skoda';
     }
 
+    /**
+     * Return random picture for taxi
+     * @returns {string}
+     * @private
+     */
     function _createTaxiPhoto() {
       return 'modules/core/client/images/avto-0' + _getRandomNumber() + '.png';
     }

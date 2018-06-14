@@ -17,25 +17,29 @@
       setupRefreshInterval();
     })();
 
+    /**
+     * Compare taxi data with the data from db
+     */
     function watchAllTaxiData() {
-      // $scope.$watch('vm.taxis', function () {
       $scope.$watch('vm.taxis', function (nVal, oVal) {
-        console.log('nVal', nVal);
-        console.log('oVal', oVal);
         if (!angular.equals(nVal, oVal)){
           vm.initialTaxis = angular.copy(vm.taxis);
         }
       }, true);
     }
 
+    /**
+     * Get taxi data
+     */
     function getTaxiData() {
       return TaxisService.getTaxis().$promise;
     }
 
-    // TODO: da narediš promise ($promise) in potem .then in tam setaš
+    /**
+     * Get all taxis data
+     */
     function getTaxis() {
       getTaxiData().then(function (result) {
-        console.log('getTaxis.getTaxiData.then');
         vm.newTaxis = result;
         if (vm.newTaxis && vm.initialTaxis && vm.newTaxis.length !== vm.initialTaxis.length) {
           vm.taxis = angular.copy(vm.newTaxis);

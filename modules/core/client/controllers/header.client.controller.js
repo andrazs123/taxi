@@ -6,12 +6,18 @@
       .controller('HeaderController', HeaderController);
 
     function HeaderController($scope, $state, menuService, TaxisService, NajemsService, $rootScope) {
-      var vm = this;
+      let vm = this;
 
       vm.accountMenu = menuService.getMenu('account').items[0];
       vm.isCollapsed = false;
       vm.menu = menuService.getMenu('topbar');
-      vm.totalIncome = 0;
+
+      let getNajemWatcher = null;
+      let getPrekinitevWatcher = null;
+      let getTaxisWatcher = null;
+
+      // Tukaj se nastavi začetni znesek
+      vm.zacetniZnesek = 123;
 
       $scope.$on('$stateChangeSuccess', stateChangeSuccess);
 
@@ -22,16 +28,48 @@
       (function init() {
         calculateTotalIncome();
         listenForPrekinitev();
+        listenForNajem();
+        listenForUpdates();
+        onDestroy();
       })();
 
       /**
-       * Poslusa ko uporabnik prekine najem da se zapise +500 h totalIncome
+       * Listen for updates from database and recaculate totalIncome
+       */
+      function listenForUpdates() {
+        getTaxisWatcher = $rootScope.$on('getTaxis', function () {
+          calculateTotalIncome();
+        });
+      }
+
+      /**
+       * Poslusa ko uporabnik prekine najem da se ponovno izracuna totalIncome
        */
       function listenForPrekinitev() {
-        $rootScope.$on('prekinitev', function () {
-          vm.totalIncome += 500;
-          // TODO ask mare če je reload false uredu
-          $state.go($state.current, {}, {reload: false});
+        getPrekinitevWatcher =  $rootScope.$on('prekinitev', function () {
+          //vm.totalIncome += 500;
+          calculateTotalIncome();
+        });
+      }
+
+      /**
+       * Poslusa kdaj se naredi najem da se ponovno zracuna totalIncome
+       */
+      function listenForNajem() {
+        getNajemWatcher = $rootScope.$on('najem', function () {
+          calculateTotalIncome();
+          });
+      }
+
+      /**
+       * cleanup na destroy direktive
+       */
+      function onDestroy() {
+        $scope.$on('$destroy', function () {
+          console.log('taxiCardDetails.onDestroy');
+          getNajemWatcher();
+          getPrekinitevWatcher();
+          getTaxisWatcher();
         });
       }
 
@@ -72,6 +110,7 @@
        * Sprehodi se cez najems tabelo in izracuna dobicek
        */
       function calculateTotalIncome() {
+        vm.totalIncome = 0;
         NajemsService.getNajems().$promise.then(function(success) {
           success.forEach(function (success) {
             if (success.prekinjen){
@@ -88,11 +127,10 @@
               vm.totalIncome += TaxisService.getZasluzek(neprekinjen);
             }
           });
-          if (vm.totalIncome === 0){
-            // Tukaj se nastavi začetni zaslužek
-            vm.totalIncome = 123;
+          if(vm.totalIncome === 0){
+            vm.totalIncome += vm.zacetniZnesek;
           }
-          return vm.totalIncome;
+          // return vm.totalIncome;
         });
       }
 

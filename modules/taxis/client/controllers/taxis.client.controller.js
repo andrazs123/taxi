@@ -6,8 +6,8 @@
     .module('taxis')
     .controller('TaxisController', TaxisController);
 
-  function TaxisController ($scope, $state, $window, taxiResolve, NajemsService, TaxisService) {
-    var vm = this;
+  function TaxisController ($scope, $state, $window, taxiResolve, NajemsService, TaxisService, $rootScope) {
+    let vm = this;
 
     vm.taxi = taxiResolve;
     vm.error = null;
@@ -45,7 +45,7 @@
     function calculateProfit(trajanje) {
       const zasluzek = [];
       zasluzek.amount = trajanje;
-      zasluzek.prekinitev = false;
+      zasluzek.prekinjen = false;
       return TaxisService.getZasluzek(zasluzek);
     }
 
@@ -61,8 +61,10 @@
         trajanje: najemInfo.trajanje,
         id_taxi: vm.taxi._id
       };
-      NajemsService.createNajem(allInfo);
-      $state.go('home');
+      NajemsService.createNajem(allInfo).then(function (result) {
+        $state.go('home');
+      });
+      $rootScope.$emit('najem');
     }
   }
 }());

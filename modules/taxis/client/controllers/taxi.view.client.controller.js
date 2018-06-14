@@ -7,7 +7,7 @@
     .controller('TaxisViewController', TaxisViewController);
 
   function TaxisViewController ($scope, $state, $window, taxiResolve, NajemsService, TaxisService) {
-    var vm = this;
+    let vm = this;
 
     vm.taxi = taxiResolve;
     vm.error = null;
@@ -62,7 +62,7 @@
     function calculateProfit(trajanje) {
       const zasluzek = [];
       zasluzek.amount = trajanje;
-      zasluzek.prekinitev = false;
+      zasluzek.prekinjen = false;
       return TaxisService.getZasluzek(zasluzek);
     }
 

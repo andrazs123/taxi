@@ -50,7 +50,6 @@ exports.invokeRolesPolicies = function () {
  * Check If Najems Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
-  // var roles = (req.user) ? req.user.roles : ['guest']; TODO
   var roles = (req.user) ? req.user.roles : ['admin'];
 
   // If an Najem is being processed and the current user created it then allow any manipulation
