@@ -5,7 +5,7 @@
         <img src="https://www.bestcarfinder.co.uk/media/1078/skoda.png" >
       </a>
     </div>
-    <div class="total-income" ng-if="!$state.current.url">
+    <div class="total-income" ng-if="!vm.showHeader">
       <div class="total-label">Total income: €{{vm.totalIncome}}</div>
       <button class="btn btn-default header-button text-uppercase" ng-disabled="!vm.checkTotalIncome()" ng-click="vm.buyNewTaxi()">Buy a new taxi</button>
     </div>

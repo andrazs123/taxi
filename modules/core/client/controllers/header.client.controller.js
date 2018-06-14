@@ -5,7 +5,7 @@
       .module('core')
       .controller('HeaderController', HeaderController);
 
-    function HeaderController($scope, $state, menuService, TaxisService, NajemsService, $rootScope) {
+    function HeaderController($scope, $state, menuService, TaxisService, NajemsService, $rootScope, $stateParams) {
       let vm = this;
 
       vm.accountMenu = menuService.getMenu('account').items[0];
@@ -66,7 +66,6 @@
        */
       function onDestroy() {
         $scope.$on('$destroy', function () {
-          console.log('taxiCardDetails.onDestroy');
           getNajemWatcher();
           getPrekinitevWatcher();
           getTaxisWatcher();
@@ -146,6 +145,7 @@
       }
 
       function stateChangeSuccess() {
+        vm.showHeader = $stateParams.carId ? true : false;
         // Collapsing the menu after navigation
         vm.isCollapsed = false;
       }
